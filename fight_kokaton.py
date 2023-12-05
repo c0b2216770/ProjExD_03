@@ -55,14 +55,6 @@ class Bird:
             (0, +5): pg.transform.rotozoom(img, -90, 1.0),  # 下
             (+5, +5): pg.transform.rotozoom(img, -45, 1.0),  # 右下
         }
-        # self.img = pg.transform.flip(  # 左右反転
-        #     pg.transform.rotozoom(  # 2倍に拡大
-        #         pg.image.load(f"{MAIN_DIR}/fig/{num}.png"), 
-        #         0, 
-        #         2.0), 
-        #     True, 
-        #     False
-        # )
         self.img = self.imgs[(+5, 0)]  # 右向きこうかとんをデフォ画像にする
         self.rct = self.img.get_rect()
         self.rct.center = xy
