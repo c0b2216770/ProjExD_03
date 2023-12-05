@@ -157,6 +157,21 @@ class Score:
         """
         screen.blit(self.img, [100, 50])
 
+class Explosion:
+    def __init__(self, bomb: Bomb):
+        """
+        爆発エフェクト
+        """
+        self.img = pg.image.load(pg.image.load(f"{MAIN_DIR}/fig/explosion.gif"), 0, 1.0)
+        self.imgs = [self.img,pg.transform.flip(self.img, True, False)]
+        self.life = 30
+    def update(self, screen: pg.Surface):
+        """
+        爆発エフェクト表示
+        """
+        index = (self.life // 5) % len(self.imgs)
+        screen.blit(self.imgs[index], self.rct)
+
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
@@ -167,6 +182,7 @@ def main():
     beam = None
     score_value = 0
     score = Score(score_value)
+    explosion = []
 
     clock = pg.time.Clock()
     tmr = 0
@@ -196,6 +212,8 @@ def main():
                 score_value += 1
                 score = Score(score_value)
                 score.update(screen)
+                explosion = Explosion(bomb.rct)
+                explosion.append(explosion)
         # Noneでない爆弾だけのリストを作る
         bombs = [bomb for bomb in bombs if bomb is not None]
 
