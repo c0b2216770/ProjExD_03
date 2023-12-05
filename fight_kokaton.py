@@ -62,7 +62,7 @@ class Bird:
         #     True, 
         #     False
         # )
-        self.img = self.imgs[(+5, 0)]   # 右向きこうかとんを初期画像にする
+        self.img = self.imgs[(+5, 0)]  # 右向きこうかとんをデフォ画像にする
         self.rct = self.img.get_rect()
         self.rct.center = xy
 
@@ -89,8 +89,8 @@ class Bird:
         self.rct.move_ip(sum_mv)
         if check_bound(self.rct) != (True, True):
             self.rct.move_ip(-sum_mv[0], -sum_mv[1])
-        if not sum_mv[0] == 0 and sum_mv[1] == 0:
-            self.img = self.imgs[tuple(sum_mv)] # なにもキーが押されていない場合
+        if not (sum_mv[0] == 0 and sum_mv[1] == 0):  # なにもキーが押されていなくなかったら
+            self.img = self.imgs[tuple(sum_mv)] 
         screen.blit(self.img, self.rct)
 
 
@@ -171,9 +171,9 @@ def main():
 
         if beam is not None and bomb is not None:
             if beam.rct.colliderect(bomb.rct):
-                bird.change_img(6, screen)
                 beam = None
                 bomb = None
+                bird.change_img(6, screen)
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
