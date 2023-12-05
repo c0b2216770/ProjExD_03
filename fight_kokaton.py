@@ -148,6 +148,9 @@ class Beam:
 
 class Score:
     def __init__(self,score):
+        """
+        scoreは点数
+        """
         self.font = pg.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
         self.img = self.font.render(f"スコア : {str(score)}", 0, (0, 0, 255))
 
